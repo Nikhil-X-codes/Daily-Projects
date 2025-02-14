@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To do</title>
+    <style>
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 300px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .input-container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+        #add {
+            margin-left: 10px;
+        }
+        .tasks {
+            width: 100%;
+            margin-top: 20px;
+        }
+        .task {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .task button {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+        <div class="input-container">
+            <input type="text" placeholder="Enter the task">
+            <button id="add">ADD</button>
+        </div>
+        <div class="tasks"></div>
+    </div>
+    
+    <script>
+        const btn = document.querySelector('#add');
+        const input = document.querySelector('input[type="text"]');
+        const tasksContainer = document.querySelector('.tasks');
+
+        btn.addEventListener('click', (e) => {
+            const taskname = input.value;
+            if (taskname) {
+                adding(taskname);
+                input.value = ''; 
+            }
+        });
+
+        function adding(taskname) {
+            const taskDiv = document.createElement('div');
+            taskDiv.textContent = taskname;
+            taskDiv.classList.add('task');
+
+            const del = document.createElement('button');
+            del.textContent = "Remove";
+            del.addEventListener('click', () => {
+                tasksContainer.removeChild(taskDiv);
+            });
+
+            taskDiv.appendChild(del);
+            tasksContainer.appendChild(taskDiv);
+        }
+    </script>
+
+</body>
+</html>
