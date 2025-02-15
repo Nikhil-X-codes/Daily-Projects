@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            background-image: url(
+                "https://media.geeksforgeeks.org/wp-content/cdn-uploads/CSS.png");
+            background-size: cover;
+        }
+
+        .container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+        }
+
+        label {
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="email"],
+        input[type="tel"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .toggle-password {
+            cursor: pointer;
+            position: absolute;
+            right: 30px;
+            top: 50px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+      
+        .login {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 20px auto;
+        }
+
+        .login img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+      
+        <div class="login">
+            <img src="login.png" alt="">
+        </div>
+
+        <form id="forming">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" placeholder="Enter your username" required>
+
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="Enter your password" required>
+
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+          <label for="phone">Phone</label>
+          <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+
+          <button type="submit">Submit</button>
+        </form>
+
+    </div>
+
+    <script>
+        document.querySelector('#forming').addEventListener("submit", (e) => {
+            e.preventDefault();
+            
+            let username = document.getElementById("username").value.trim();
+            let password = document.getElementById("password").value.trim();
+            let phone = document.getElementById("phone").value.trim();
+
+            let usernameRegex = /^[a-zA-Z0-9_]{5,15}$/;
+            let passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+            let phoneRegex = /^\d{10}$/;
+        
+            let isValid = true;
+
+            if (!usernameRegex.test(username)) {
+                alert("Invalid username");
+                isValid = false;
+            }
+
+            if (!passwordRegex.test(password)) {
+                alert("Invalid password");
+                isValid = false;
+            }
+
+            if (!phoneRegex.test(phone)) {
+                alert("Invalid phone number");
+                isValid = false;
+            }
+
+            if (isValid) {
+                alert("Form submitted successfully!");
+                e.target.reset();
+            }
+        });
+
+
+    </script>
+</body>
+</html>
