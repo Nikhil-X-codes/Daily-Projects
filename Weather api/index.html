@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+ <link rel="stylesheet" href="style.css">        
+</head>
+<body>
+    <div class="card">
+        <div class="container">
+            <h1>Weather</h1>
+            <form method="GET">
+                <input type="text" name="q" placeholder="Enter city name" required>
+                <input type="text" name="appid" value="your_api_key_here" hidden>
+                <button type="submit" id="search">Search</button>
+            </form>
+            <div class="weather-info">
+                <div class="details">
+                    <p id="temperature">Temperature: --°C</p>
+                    <p id="wind">Wind: -- km/h</p>
+                    <p id="humidity">Humidity: --%</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+const apikey = "295adda0c20fd79cd6dcd552140106b0";
+
+const search = document.getElementById("search");
+
+search.addEventListener("click", function() {
+
+    event.preventDefault();
+
+    const city = document.querySelector('input[name="q"]').value.trim();
+
+    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apikey}&units=metric`;
+
+    async function apis() {
+
+        try {
+            const response = await fetch(apiUrl);
+
+            const data = await response.json();
+
+            document.getElementById("temperature").innerText = `${Math.round(data.main.temp)}` + '°C';
+            document.getElementById("wind").innerText = `${Math.round(data.wind.speed)}` + ' km/h';
+            document.getElementById("humidity").innerText = `${data.main.humidity}` + '%';
+         
+        } 
+        
+        catch {
+            alert("Please enter a valid city name.");
+        }
+    }
+
+    apis();
+});
+
+    </script>
+
+</body>
+</html>
